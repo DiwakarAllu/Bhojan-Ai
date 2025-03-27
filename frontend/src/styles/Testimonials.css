@@ -1,0 +1,66 @@
+/* Testimonials.css */
+
+.testimonials-container {
+  text-align: center;
+  padding: 40px 20px;
+  background-color: #FFEB77;
+}
+
+.section-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+.testimonial-card {
+  background: #fff;
+  border-radius: 12px;
+  padding: 20px;
+  box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.1);
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+  animation: fadeIn 0.5s ease-in-out;
+}
+
+.testimonial-text {
+  font-size: 18px;
+  color: #444;
+  font-style: italic;
+  margin-bottom: 15px;
+}
+
+.testimonial-name {
+  font-size: 16px;
+  font-weight: bold;
+  color: #2c3e50;
+}
+
+.next-btn {
+  margin-top: 20px;
+  background: #ff5722;
+  color: white;
+  font-size: 14px;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s ease-in-out;
+}
+
+.next-btn:hover {
+  background: #ff7f50;
+}
+
+/* Smooth fade-in effect for testimonials */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

@@ -1,0 +1,36 @@
+.footer-container {
+  background-color: #ffcc00; /* Orange theme color */
+  color: #ffffff; /* White text for readability */
+  padding: 20px;
+  text-align: center;
+  margin-top: 50px;
+  border-top: 5px solid #ff6600; 
+}
+
+.footer-content {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+}
+
+.footer-text {
+  font-size: 16px;
+  color: #703c00;/* Light warm tone for soft contrast */
+}
+
+.footer-links {
+  display: flex;
+  gap: 20px;
+}
+
+.footer-link {
+  color: #703c00; /* White links for contrast */
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease-in-out;
+}
+
+.footer-link:hover {
+  color: #ffd166; /* Light yellow-orange hover effect */
+}
