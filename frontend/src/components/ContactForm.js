@@ -1,8 +1,13 @@
 import { useState } from "react";
-import "../styles/ContactForm.css"; // Import the CSS file
+import Swal from "sweetalert2";
+import "../styles/ContactForm.css";
 
 export default function ContactForm() {
-  const [formData, setFormData] = useState({ name: "", email: "", message: "" });
+  const [formData, setFormData] = useState({
+    name: "",
+    email: "",
+    message: "",
+  });
   const [errors, setErrors] = useState({});
   const [isSubmitting, setIsSubmitting] = useState(false);
 
@@ -29,14 +34,43 @@ export default function ContactForm() {
 
     if (Object.keys(validationErrors).length === 0) {
       setIsSubmitting(true);
-      
+
       try {
-        // Simulated API call (Replace with actual API request)
-        await new Promise((resolve) => setTimeout(resolve, 2000));
-        alert(`Thanks for reaching out, ${formData.name}! We will get back to you soon.`);
-        setFormData({ name: "", email: "", message: "" }); // Clear form
+        const response = await fetch(
+          "https://formsubmit.co/75ab42d2f83b35de4da2415509950ba8",
+          {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+              Accept: "application/json",
+            },
+            body: JSON.stringify({
+              name: formData.name,
+              email: formData.email,
+              message: formData.message,
+              _captcha: false,
+            }),
+          }
+        );
+
+        if (response.ok) {
+          Swal.fire({
+            title: `Thank you, ${formData.name}!`,
+            text: "Your message has been sent successfully.",
+            icon: "success",
+            confirmButtonText: "Close",
+          });
+          setFormData({ name: "", email: "", message: "" });
+        } else {
+          throw new Error("Failed to send message");
+        }
       } catch (error) {
-        alert("Something went wrong! Please try again.");
+        Swal.fire({
+          title: "Oops!",
+          text: "Something went wrong. Please try again later.",
+          icon: "error",
+          confirmButtonText: "Okay",
+        });
       } finally {
         setIsSubmitting(false);
       }
@@ -56,6 +90,12 @@ export default function ContactForm() {
           className={`contact-input ${errors.name ? "input-error" : ""}`}
           onChange={handleChange}
         />
+        <input
+          type="hidden"
+          name="_subject"
+          value="Message from BhojanAI Site"
+        />
+
         {errors.name && <p className="error-message">{errors.name}</p>}
 
         <input
@@ -77,7 +117,11 @@ export default function ContactForm() {
         ></textarea>
         {errors.message && <p className="error-message">{errors.message}</p>}
 
-        <button type="submit" className="contact-button" disabled={isSubmitting}>
+        <button
+          type="submit"
+          className="contact-button"
+          disabled={isSubmitting}
+        >
           {isSubmitting ? "Submitting..." : "Submit"}
         </button>
       </form>
