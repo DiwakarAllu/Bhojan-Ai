@@ -80,6 +80,6 @@ To get started with the project locally, follow the instructions below:
 ### Prerequisites
 
 - **Python** (for backend development)
-- **Node.js** (for frontend development)
+- **React** (for frontend development)
 - **Android Studio** (for mobile app development)
 - **TensorFlow Lite** (for model optimization and mobile deployment)
