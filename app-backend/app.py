@@ -831,7 +831,7 @@ def hugging_predict():
 
 @app.route("/web", methods=["GET"])
 def webview():
-    return redirect("https://huggingface.co/spaces/cutiepi3/bhojan-ai", code=302)  
+    return redirect("https://cutiepi3-bhojan-ai.hf.space/?__theme=system", code=302)  
 
 @app.route("/", methods=["GET"])
 def home():
