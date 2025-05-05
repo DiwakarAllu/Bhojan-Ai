@@ -4,6 +4,8 @@ import cv2
 import numpy as np
 from PIL import Image
 import io
+from gradio_client import Client, handle_file
+import tempfile
 
 # Load model
 model = YOLO("best.pt")
@@ -773,8 +775,9 @@ nutrition_data = {
 }
 
 app = Flask(__name__)
+client = Client("cutiepi3/bhojan-ai")
 
-@app.route("/predict", methods=["POST"])
+@app.route("/prediction", methods=["POST"])
 def predict():
     if "image" not in request.files:
         return jsonify({"error": "No image uploaded"}), 400
@@ -804,6 +807,27 @@ def predict():
 
     return jsonify({"detections": detections})
 
+
+@app.route("/predict", methods=["POST"])
+def hugging_predict():
+    if "image" not in request.files:
+        return jsonify({"error": "No image uploaded"}), 400
+
+    image = request.files["image"]
+
+    # Save uploaded file to temp directory
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp:
+        image.save(temp.name)
+        temp_path = temp.name
+
+    try:
+        result = client.predict(
+            image=handle_file(temp_path),
+            api_name="/predict"
+        )
+        return jsonify(result)
+    except Exception as e:
+        return jsonify({"error": str(e)}), 500
 
 @app.route("/", methods=["GET"])
 def home():
