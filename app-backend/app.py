@@ -1,4 +1,4 @@
-from flask import Flask, request, jsonify
+from flask import Flask, redirect, request, jsonify
 from ultralytics import YOLO
 import cv2
 import numpy as np
@@ -828,6 +828,10 @@ def hugging_predict():
         return jsonify(result)
     except Exception as e:
         return jsonify({"error": str(e)}), 500
+
+@app.route("/web", methods=["GET"])
+def webview():
+    return redirect("https://huggingface.co/spaces/cutiepi3/bhojan-ai", code=302)  
 
 @app.route("/", methods=["GET"])
 def home():
