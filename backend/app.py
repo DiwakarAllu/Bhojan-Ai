@@ -9,6 +9,8 @@ from models.user_model import db, User
 from flask_cors import CORS 
 from routes.predict_routes import predict_blueprint
 from routes.yolo_routes import yolo_blueprint  
+import tempfile
+from gradio_client import Client, handle_file
 
 
 load_dotenv()  
@@ -18,6 +20,7 @@ CORS(app)
 app.config.from_object(Config)
 db.init_app(app)
 jwt = JWTManager(app)
+client = Client("cutiepi3/bhojan-ai")
 
 app.register_blueprint(predict_blueprint, url_prefix="/")
 app.register_blueprint(auth_blueprint, url_prefix="/auth")
@@ -51,11 +54,12 @@ def hugging_predict2():
         return jsonify({"result": result})
 
     except Exception as e:
+        # Clean up temp file if an error occurs
         if os.path.exists(temp_path):
             os.remove(temp_path)
 
         return jsonify({"error": str(e)}), 500
-        
+    
 
 if __name__ == "__main__":
     with app.app_context():
