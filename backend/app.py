@@ -27,6 +27,36 @@ app.register_blueprint(yolo_blueprint, url_prefix="/")
 def hi():
     return jsonify("hi,Allu"), 200
 
+@app.route("/predict2", methods=["POST"])
+def hugging_predict2():
+    if "image" not in request.files:
+        return jsonify({"error": "No image uploaded"}), 400
+
+    image = request.files["image"]
+
+    # Save uploaded file to temp directory
+    with tempfile.NamedTemporaryFile(delete=False, suffix=".jpg") as temp:
+        image.save(temp.name)
+        temp_path = temp.name
+
+    try:
+        result = client.predict(
+            image=handle_file(temp_path),
+            api_name="/yolo_predict"  
+        )
+
+        # Delete temp file after processing
+        os.remove(temp_path)
+
+        return jsonify({"result": result})
+
+    except Exception as e:
+        if os.path.exists(temp_path):
+            os.remove(temp_path)
+
+        return jsonify({"error": str(e)}), 500
+        
+
 if __name__ == "__main__":
     with app.app_context():
         db.create_all() 
