@@ -6,3 +6,4 @@ matplotlib
 pillow
 gunicorn
 gradio_client
+Flask-Cors
