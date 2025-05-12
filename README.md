@@ -1,7 +1,7 @@
 # **__Bhojan-AI__**  
 *AI Solution for Estimation of Protein in South Indian Meals*
 
-
+![demo](https://github.com/DiwakarAllu/Bhojan-Ai/blob/main/bhojan-optimize.gif)
 ## Overview
 
 In 2024, nutrition apps are expected to have 1.4 billion users. However, a major challenge persists: the manual entry of food data, which is often time-consuming and inaccurate. For individuals tracking protein intake—particularly bodybuilders and athletes—estimating protein content in meals can be complicated, especially with South Indian cuisine's variety of ingredients and cooking methods.
