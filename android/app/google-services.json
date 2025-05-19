@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "420686358984",
+    "project_id": "protifeast",
+    "storage_bucket": "protifeast.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:420686358984:android:a6a4738eed55b36a43f8fd",
+        "android_client_info": {
+          "package_name": "com.example.protifeast"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD6Rc4CqNHvTzzy_gmVk-V0XmODfcueBDI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
